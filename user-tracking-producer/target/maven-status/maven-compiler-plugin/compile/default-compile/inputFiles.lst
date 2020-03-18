@@ -1,0 +1,10 @@
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/enums/ProductType.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/enums/Color.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/EventGenerator.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/model/Product.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/model/User.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/enums/UserId.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/model/Event.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/model/Orders.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/enums/DesignType.java
+/Users/javierrodriguez/Documents/Repositorios/Kafka/EventDrivenDesign/Example03/user-tracking-producer/src/main/java/com/pluralsight/kafka/producer/Main.java

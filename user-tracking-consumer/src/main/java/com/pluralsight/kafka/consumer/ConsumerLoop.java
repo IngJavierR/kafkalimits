@@ -23,7 +23,7 @@ public class ConsumerLoop implements Runnable {
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
         //props.put("bootstrap.servers", "localhost:9093");
-        props.put("bootstrap.servers", "192.168.0.170:9093");
+        props.put("bootstrap.servers", "localhost:9093");
         props.put("group.id", "user-tracking-consumer1_"+this.id);
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");

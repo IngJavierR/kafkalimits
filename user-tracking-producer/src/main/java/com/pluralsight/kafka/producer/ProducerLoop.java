@@ -27,7 +27,7 @@ public class ProducerLoop implements Runnable {
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
         //props.put("bootstrap.servers", "localhost:9093,localhost:9094");
-        props.put("bootstrap.servers", "192.168.0.170:9093");
+        props.put("bootstrap.servers", "localhost:9093");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         producer = new KafkaProducer<>(props);
@@ -37,13 +37,12 @@ public class ProducerLoop implements Runnable {
     public void run() {
         System.out.println("Topic:" + this.topic + " Thread " + Thread.currentThread().getName());
 
-        //char[] chars = new char[this.msjSize];
-        //Arrays.fill(chars, 'f');
-        //String msg = new String(chars);
+        char[] chars = new char[this.msjSize];
+        Arrays.fill(chars, 'f');
+        String msg = new String(chars);
 
-        List<Product> products = getProductPrice(20000);
-
-        String msg = new Gson().toJson(products);
+        //List<Product> products = getProductPrice(100);
+        //String msg = new Gson().toJson(products);
 
         for (int i = 0; i <= this.numMsj; i++) {
             String key = this.idPrefix + "_" + i;

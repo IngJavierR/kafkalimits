@@ -9,13 +9,16 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        int tasks = 1;
-        int numMsj = 20000;
-        int msjSize = 1;
+        //afkaAdmin kafkaAdmin = new KafkaAdmin();
+        //kafkaAdmin.createTopics(2000, "farmax");
+
+        int tasks = 2000;
+        int numMsj = 1;
+        int msjSize = 1000;
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         for (int i = 1; i <= tasks; i++) {
 
-            Runnable worker = new ProducerLoop("user-tracking-event", numMsj, msjSize, "MS1_" + i);
+            Runnable worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
             executor.execute(worker);
         }
         executor.shutdown();

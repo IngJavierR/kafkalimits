@@ -14,7 +14,7 @@ public class Main {
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         for (int i = 1; i <= tasks; i++) {
 
-            Runnable worker = new ConsumerLoop(i, Arrays.asList("user-tracking-event"));
+            Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_999"));
             executor.execute(worker);
         }
         executor.shutdown();

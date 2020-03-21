@@ -17,8 +17,8 @@ public class User {
 
     public User(UserId userId) {
         this.userId = userId;
-        this.preferences = new ArrayList<>();
-        this.suggestions = new ArrayList<>();
+        this.preferences = new ArrayList<PreferredProduct>();
+        this.suggestions = new ArrayList<String>();
     }
 
     private UserId userId;

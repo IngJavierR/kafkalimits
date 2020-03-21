@@ -9,12 +9,19 @@ import java.util.concurrent.Executors;
 public class Main {
 
     public static void main(String[] args) {
+    	
+    	if (args.length < 2) {
+    		throw new IllegalArgumentException("Pelase specify numer of tasks");
+    	}
 
-        int tasks = 1;
+        int tasks = Integer.parseInt(args[0]);
+        int initTask = Integer.parseInt(args[1]);
+        
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
-        for (int i = 1; i <= tasks; i++) {
-
-            Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_999"));
+        
+        for (int i = initTask; i <= tasks; i++) {
+        	Runnable worker = new ConsumerLoop(i, Arrays.asList("Transactions"));
+            //Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_" + i));
             executor.execute(worker);
         }
         executor.shutdown();

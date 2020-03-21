@@ -9,23 +9,35 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        //afkaAdmin kafkaAdmin = new KafkaAdmin();
-        //kafkaAdmin.createTopics(2000, "farmax");
+        //KafkaAdmin kafkaAdmin = new KafkaAdmin();
+        //kafkaAdmin.createTopics(10, "farmax");
+    	
+    	
+    	if (args.length < 3) {
+    		throw new IllegalArgumentException("Pelase specify numer of tasks");
+    	}
+    	
+    	
 
-        int tasks = 2000;
-        int numMsj = 1;
-        int msjSize = 1000;
-        ExecutorService executor = Executors.newFixedThreadPool(tasks);
-        for (int i = 1; i <= tasks; i++) {
+        int tasks =  Integer.parseInt(args[0]);
+        int numMsj = Integer.parseInt(args[1]);
+        int msjSize = Integer.parseInt(args[2]);
+        int iniTask = Integer.parseInt(args[3]);
+        
+        //ExecutorService executor = Executors.newFixedThreadPool(tasks);
+        for (int i = iniTask; i <= tasks; i++) {
 
-            Runnable worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
-            executor.execute(worker);
+            //Runnable worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
+           // executor.execute(worker);
+
+            ProducerLoop worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
+            worker.run();
         }
-        executor.shutdown();
+       // executor.shutdown();
         // Wait until all threads are finish
-        while (!executor.isTerminated()) {
+        /*while (!executor.isTerminated()) {
 
-        }
+        }*/
         System.out.println("\nFinished all threads");
 
     }

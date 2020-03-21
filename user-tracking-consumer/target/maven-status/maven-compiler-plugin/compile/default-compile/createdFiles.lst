@@ -1,0 +1,9 @@
+com\pluralsight\kafka\consumer\enums\UserId.class
+com\pluralsight\kafka\consumer\model\PreferredProduct$PreferredProductBuilder.class
+com\pluralsight\kafka\consumer\ConsumerLoop.class
+com\pluralsight\kafka\consumer\Main.class
+com\pluralsight\kafka\consumer\model\PreferredProduct.class
+com\pluralsight\kafka\consumer\model\User.class
+com\pluralsight\kafka\consumer\service\UserDB.class
+com\pluralsight\kafka\consumer\model\User$UserBuilder.class
+com\pluralsight\kafka\consumer\SuggestionEngine.class

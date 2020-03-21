@@ -1,6 +1,5 @@
 package com.pluralsight.kafka.consumer.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 

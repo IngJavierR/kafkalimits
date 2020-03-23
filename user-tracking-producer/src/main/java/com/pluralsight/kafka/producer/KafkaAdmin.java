@@ -42,7 +42,7 @@ public class KafkaAdmin {
         List<NewTopic> newTopics = new ArrayList<>();
 
         for (int i = 0; i < number; i++) {
-            NewTopic newTopic = new NewTopic(prefix + "_suc_" + i, 2, (short)1);
+            NewTopic newTopic = new NewTopic(prefix + "_suc_" + i, 6, (short)3);
             newTopics.add(newTopic);
         }
         return newTopics;

@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //KafkaAdmin kafkaAdmin = new KafkaAdmin();
-        //kafkaAdmin.createTopics(10, "farmax");
+        //kafkaAdmin.createTopics(2000, "farmax");
     	
     	
     	if (args.length < 3) {

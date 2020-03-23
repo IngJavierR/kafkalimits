@@ -20,8 +20,8 @@ public class Main {
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         
         for (int i = initTask; i <= tasks; i++) {
-        	Runnable worker = new ConsumerLoop(i, Arrays.asList("Transactions"));
-            //Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_" + i));
+        	//Runnable worker = new ConsumerLoop(i, Arrays.asList("Transactions"));
+            Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_" + i));
             executor.execute(worker);
         }
         executor.shutdown();

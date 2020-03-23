@@ -31,7 +31,9 @@ public class KafkaAdmin {
     public void createTopics(int number, String prefix) {
 
         List<NewTopic> newTopics = createListOfTopics(number, prefix);
-        KafkaAdmin.adminClient.createTopics(newTopics);
+        List<String> existingTopics = listOfTopics(number, prefix);
+        //KafkaAdmin.adminClient.createTopics(newTopics);
+        KafkaAdmin.adminClient.deleteTopics(existingTopics);
         KafkaAdmin.adminClient.close();
     }
 
@@ -44,6 +46,16 @@ public class KafkaAdmin {
         for (int i = 0; i < number; i++) {
             NewTopic newTopic = new NewTopic(prefix + "_suc_" + i, 6, (short)3);
             newTopics.add(newTopic);
+        }
+        return newTopics;
+    }
+
+    private List<String> listOfTopics(int number, String prefix){
+
+        List<String> newTopics = new ArrayList<>();
+
+        for (int i = 0; i < number; i++) {
+            newTopics.add(prefix + "_suc_" + i);
         }
         return newTopics;
     }

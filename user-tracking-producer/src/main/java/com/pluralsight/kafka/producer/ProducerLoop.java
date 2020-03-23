@@ -10,7 +10,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.math.BigInteger;
 import java.util.*;
 
-public class ProducerLoop {
+public class ProducerLoop implements Runnable {
 
     private final Producer<String, String> producer;
     private final String topic;

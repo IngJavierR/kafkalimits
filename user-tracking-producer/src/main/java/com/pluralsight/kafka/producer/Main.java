@@ -10,18 +10,22 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         //KafkaAdmin kafkaAdmin = new KafkaAdmin();
-        //kafkaAdmin.createTopics(2000, "farmax");
+        //kafkaAdmin.createTopics(2000, "farmax_suc_");
     	
     	
     	if (args.length < 3) {
     		throw new IllegalArgumentException("Pelase specify numer of tasks");
     	}
-    	
-    	
+
+        //int tasks =  10;
+        //int numMsj = 100;
+        //int msjSize = 1000;
+        //int iniTask = 1;
+        //boolean mode = false;
 
         int tasks =  Integer.parseInt(args[0]);
         int numMsj = Integer.parseInt(args[1]);
-        int msjSize = Integer.parseInt(args[2]);
+        int msjSize = Integer.parseInt(args[2]);//1000
         int iniTask = Integer.parseInt(args[3]);
         boolean mode = Boolean.parseBoolean(args[4]);
         
@@ -30,11 +34,11 @@ public class Main {
         for (int i = iniTask; i <= tasks; i++) {
 
         	if(mode) {
-        		Runnable worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
+        		Runnable worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + i, i);
                 executor.execute(worker);		
         	} else {
         		
-        		ProducerLoop worker = new ProducerLoop("farmax_suc_" + i, numMsj, msjSize, "MS1_" + i);
+        		ProducerLoop worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + i, i);
                 worker.run();
         	}
         	

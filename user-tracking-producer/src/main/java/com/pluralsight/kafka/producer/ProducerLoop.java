@@ -18,22 +18,24 @@ public class ProducerLoop implements Runnable {
     private final int msjSize;
     private final String idPrefix;
     private int countMsj = 0;
+    private final int id;
 
-    public ProducerLoop(String topic, int numMsj, int msjSize, String idPrefix) {
+    public ProducerLoop(String topic, int numMsj, int msjSize, String idPrefix, int id) {
         this.topic = topic;
         this.numMsj = numMsj;
         this.msjSize = msjSize;
         this.idPrefix = idPrefix;
+        this.id = id;
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
-        //props.put("bootstrap.servers", "localhost:9093,localhost:9094");
-        //props.put("bootstrap.servers", "192.168.0.170:9093");
-        props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
+        //props.put("bootstrap.servers", "localhost:9093");
+        props.put("bootstrap.servers", "192.168.0.171:9093");
+        /*props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
         props.put("security.protocol","SASL_SSL");
         String configJaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"WPEYWBQCN6X76JPN\"  password=\"8qgNZLyrh7e7BRsnZaRSXG5GLy7ZAUmKVy65Td1FrdcCQT38k+6tE8j9/WvQPqF6\";";
         props.put("sasl.jaas.config",configJaas);
         props.put("ssl.endpoint.identification.algorithm","https");
-        props.put("sasl.mechanism","PLAIN");
+        props.put("sasl.mechanism","PLAIN");*/
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         producer = new KafkaProducer<>(props);
@@ -50,11 +52,11 @@ public class ProducerLoop implements Runnable {
         //String msg = new Gson().toJson(products);
 
         for (int i = 0; i <= this.numMsj; i++) {
-            String key = this.idPrefix + "_" + i;
+            String key = this.idPrefix;
             //String value = "id_" + i + msg;
             String value = msg;
 
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, key, value);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, this.id, key, value);
             System.out.println("Counter:" + (countMsj++) + " key:" + key + " Thread:" + Thread.currentThread().getName());
             this.producer.send(producerRecord);
         }

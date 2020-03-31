@@ -12,7 +12,10 @@ public class Main {
     	
     	if (args.length < 2) {
     		throw new IllegalArgumentException("Pelase specify numer of tasks");
-    	}
+        }
+
+        //int tasks = 10;
+        //int initTask = 1;
 
         int tasks = Integer.parseInt(args[0]);
         int initTask = Integer.parseInt(args[1]);
@@ -21,7 +24,7 @@ public class Main {
         
         for (int i = initTask; i <= tasks; i++) {
         	//Runnable worker = new ConsumerLoop(i, Arrays.asList("Transactions"));
-            Runnable worker = new ConsumerLoop(i, Arrays.asList("farmax_suc_" + i));
+            Runnable worker = new ConsumerLoop(i, Arrays.asList("farmaxprices"));
             executor.execute(worker);
         }
         executor.shutdown();

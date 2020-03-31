@@ -23,7 +23,7 @@ public class ConsumerLoop implements Runnable {
         this.topics = topics;
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
-        //props.put("bootstrap.servers", "localhost:9094");
+        //props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9094");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.172:9094");
         /*props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
         props.put("security.protocol","SASL_SSL");
@@ -34,7 +34,8 @@ public class ConsumerLoop implements Runnable {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "farmaxprices-gpo_"+(this.id - 1));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 
         this.consumer = new KafkaConsumer<String, String>(props);
     }
@@ -54,6 +55,7 @@ public class ConsumerLoop implements Runnable {
                     data.put("group.id", "farmax-consumer_"+this.id);
                     //data.put("value", record.value());
                     System.out.println("Message Counter:" + (countMsj++) + " Id:" + this.id + " Msj:" + data + " Thread:" + Thread.currentThread().getName());
+                    consumer.commitSync();
                 }
             }
         } catch (WakeupException e) {

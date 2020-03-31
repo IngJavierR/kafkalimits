@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -30,7 +31,7 @@ public class ProducerLoop implements Runnable {
         this.id = id;
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
-        //props.put("bootstrap.servers", "localhost:9093");
+        //props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9093");
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.171:9093");
         /*props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
         props.put("security.protocol","SASL_SSL");
@@ -38,8 +39,8 @@ public class ProducerLoop implements Runnable {
         props.put("sasl.jaas.config",configJaas);
         props.put("ssl.endpoint.identification.algorithm","https");
         props.put("sasl.mechanism","PLAIN");*/
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         producer = new KafkaProducer<>(props);
     }
 
@@ -58,7 +59,7 @@ public class ProducerLoop implements Runnable {
             //String value = "id_" + i + msg;
             String value = msg;
 
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, this.id, key, value);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, (this.id - 1), key, value);
             System.out.println("Counter:" + (countMsj++) + " key:" + key + " Thread:" + Thread.currentThread().getName());
             this.producer.send(producerRecord);
         }

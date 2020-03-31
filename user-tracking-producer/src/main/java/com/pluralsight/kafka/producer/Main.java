@@ -11,34 +11,32 @@ public class Main {
 
         //KafkaAdmin kafkaAdmin = new KafkaAdmin();
         //kafkaAdmin.createTopics(2000, "farmax_suc_");
-    	
-    	
-    	if (args.length < 3) {
-    		throw new IllegalArgumentException("Pelase specify numer of tasks");
-    	}
 
-        //int tasks =  10;
-        //int numMsj = 100;
-        //int msjSize = 1000;
-        //int iniTask = 1;
-        //boolean mode = false;
+        int tasks =  10;
+        int numMsj = 10;
+        int msjSize = 1000;
+        int iniTask = 1;
+        boolean mode = false;
 
+        /*if (args.length < 3) {
+            throw new IllegalArgumentException("Pelase specify numer of tasks");
+        }
         int tasks =  Integer.parseInt(args[0]);
         int numMsj = Integer.parseInt(args[1]);
         int msjSize = Integer.parseInt(args[2]);//1000
         int iniTask = Integer.parseInt(args[3]);
-        boolean mode = Boolean.parseBoolean(args[4]);
+        boolean mode = Boolean.parseBoolean(args[4]);*/
         
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         
         for (int i = iniTask; i <= tasks; i++) {
 
         	if(mode) {
-        		Runnable worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + i, i);
+        		Runnable worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + (i-1), i);
                 executor.execute(worker);		
         	} else {
         		
-        		ProducerLoop worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + i, i);
+        		ProducerLoop worker = new ProducerLoop("farmaxprices", numMsj, msjSize, "Suc_" + (i-1), i);
                 worker.run();
         	}
         	

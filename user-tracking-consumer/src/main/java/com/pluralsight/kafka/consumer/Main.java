@@ -10,14 +10,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int tasks = 1;
-        int initTask = 1;
+        /*int tasks = 1;
+        int initTask = 1;*/
 
-        /*if (args.length < 2) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("Pelase specify numer of tasks");
         }
         int tasks = Integer.parseInt(args[0]);
-        int initTask = Integer.parseInt(args[1]);*/
+        int initTask = Integer.parseInt(args[1]);
         
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         

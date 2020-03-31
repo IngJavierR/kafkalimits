@@ -5,7 +5,9 @@ import com.pluralsight.kafka.producer.model.Prices;
 import com.pluralsight.kafka.producer.model.Product;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -29,15 +31,15 @@ public class ProducerLoop implements Runnable {
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
         //props.put("bootstrap.servers", "localhost:9093");
-        props.put("bootstrap.servers", "192.168.0.171:9093");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.171:9093");
         /*props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
         props.put("security.protocol","SASL_SSL");
         String configJaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"WPEYWBQCN6X76JPN\"  password=\"8qgNZLyrh7e7BRsnZaRSXG5GLy7ZAUmKVy65Td1FrdcCQT38k+6tE8j9/WvQPqF6\";";
         props.put("sasl.jaas.config",configJaas);
         props.put("ssl.endpoint.identification.algorithm","https");
         props.put("sasl.mechanism","PLAIN");*/
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         producer = new KafkaProducer<>(props);
     }
 
@@ -60,6 +62,7 @@ public class ProducerLoop implements Runnable {
             System.out.println("Counter:" + (countMsj++) + " key:" + key + " Thread:" + Thread.currentThread().getName());
             this.producer.send(producerRecord);
         }
+        this.producer.flush();
         this.producer.close();
     }
 

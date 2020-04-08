@@ -43,8 +43,8 @@ public class ConsumerLoop implements Runnable {
     public void run() {
         System.out.println("Task:" + this.id + " Thread:" + Thread.currentThread().getName());
         try {
-            consumer.assign(Collections.singletonList(new TopicPartition("farmaxprices", (this.id - 1)  )));
-            //consumer.subscribe(topics);
+            //consumer.assign(Collections.singletonList(new TopicPartition("farmaxprices", (this.id - 1)  )));
+            consumer.subscribe(topics);
             while (true) {
 				Duration timeout = null;
 				ConsumerRecords<String, String> records = consumer.poll(timeout.ofMillis(1000));

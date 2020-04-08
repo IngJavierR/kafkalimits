@@ -55,11 +55,13 @@ public class ProducerLoop implements Runnable {
         //String msg = new Gson().toJson(products);
 
         for (int i = 0; i <= this.numMsj; i++) {
-            String key = this.idPrefix;
+            String key = null;
+            //String key = this.idPrefix;
             //String value = "id_" + i + msg;
             String value = msg;
 
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, (this.id - 1), key, value);
+            //ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, (this.id - 1), key, value);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(this.topic, key, value);
             System.out.println("Counter:" + (countMsj++) + " key:" + key + " Thread:" + Thread.currentThread().getName());
             this.producer.send(producerRecord);
         }

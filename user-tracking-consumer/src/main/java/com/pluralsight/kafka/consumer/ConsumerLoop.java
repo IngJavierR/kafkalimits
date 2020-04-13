@@ -1,10 +1,14 @@
 package com.pluralsight.kafka.consumer;
 
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.config.SaslConfigs;
+import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
@@ -24,13 +28,24 @@ public class ConsumerLoop implements Runnable {
         Properties props = new Properties();
         //props.put("bootstrap.servers", "192.168.0.171:9093,192.168.0.172:9094,192.168.0.173:9095");
         //props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9094");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.172:9094");
+        ///props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.172:9094");
         /*props.put("bootstrap.servers", "pkc-epwny.eastus.azure.confluent.cloud:9092");
         props.put("security.protocol","SASL_SSL");
         String configJaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"WPEYWBQCN6X76JPN\"  password=\"8qgNZLyrh7e7BRsnZaRSXG5GLy7ZAUmKVy65Td1FrdcCQT38k+6tE8j9/WvQPqF6\";";
         props.put("sasl.jaas.config",configJaas);
         props.put("ssl.endpoint.identification.algorithm","https");
         props.put("sasl.mechanism","PLAIN");*/
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "aximxfarma2:9193,aximxfarma3:9193,aximxfarma4:9193");
+        props.put(AdminClientConfig.SECURITY_PROTOCOL_CONFIG,"SASL_SSL");
+        props.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, SslConfigs.DEFAULT_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM);
+        String configJaas = "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"posClient\" password=\"P05C%li3n\";";
+        props.put(SaslConfigs.SASL_JAAS_CONFIG,configJaas);
+        props.put(SaslConfigs.SASL_MECHANISM,"SCRAM-SHA-256");
+        props.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, getClass().getClassLoader().getResource("kafka.server.keystore.jks").toString().replace("file:/", ""));
+        props.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "FaPos2015");
+        props.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "FaPos2015");
+        props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, getClass().getClassLoader().getResource("kafka.server.truststore.jks").toString().replace("file:/", ""));
+        props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "FaPos2015");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "farmaxprices-gpo_"+(this.id - 1));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

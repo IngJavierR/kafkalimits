@@ -12,20 +12,20 @@ public class Main {
         //KafkaAdmin kafkaAdmin = new KafkaAdmin();
         //kafkaAdmin.createTopics(2000, "store-consumer-");
 
-        int tasks =  100;
+        /*int tasks =  100;
         int numMsj = 10;
         int msjSize = 1000;
         int iniTask = 1;
-        boolean mode = true;
+        boolean mode = true;*/
 
-        /*if (args.length < 3) {
+        if (args.length < 3) {
             throw new IllegalArgumentException("Pelase specify numer of tasks");
         }
         int tasks =  Integer.parseInt(args[0]);
         int numMsj = Integer.parseInt(args[1]);
         int msjSize = Integer.parseInt(args[2]);//1000
         int iniTask = Integer.parseInt(args[3]);
-        boolean mode = Boolean.parseBoolean(args[4]);*/
+        boolean mode = Boolean.parseBoolean(args[4]);
         
         ExecutorService executor = Executors.newFixedThreadPool(tasks);
         
@@ -50,7 +50,6 @@ public class Main {
 
         }
         System.out.println("\nFinished all threads");
-
     }
 
 }
